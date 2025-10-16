@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #E6E0FF;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.infinite-scrolling{
+  background-image: url("https://cdn.pixabay.com/photo/2016/06/05/07/59/stars-1436950_1280.jpg"); height: 100%; width: 3840px; animation: slide 60s linear infinite;
+  position: fixed;
+  z-index: -1;
+}
+
+h1 {
+  color: #E6E0FF;
+  text-shadow: 2px 2px 5px #220000;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+
+.Controls {
+  background-color: rgba(10, 5, 40, 0.9);
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 12px;
+  max-width: 500px;
+  box-shadow: 0 0 15px #5F4B8B;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px 0;
+  font-weight: bold;
+}
+
+select, input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #4ADEDE;
+  background-color: #0A0528;
+  color: #E6E0FF;
+}
+
+button {
+  margin: 10px 5px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #FF5A73;
+  color: #fff;
+  font-family: 'Orbitron';
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #FF8596;
+  box-shadow: 0 0 10px #FF5A73;
+}
+
+.photo-card {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.photo-card img {
+  width: 200px;
+  display: block;
+  border-radius: 10px;
+  transition: transform 0.25s ease;
+}
+
+.photo-card:hover {
+  transform: scale(1.05);
+}
+
+.download-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(74, 222, 222, 0.2);
+  color: #4ADEDE;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 6px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 2;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #FF5A73; 
+  color: #0A0528;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #FF5A73; 
+}
+
+.cam-label {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(10, 5, 40, 0.3);
+  color: #4ADEDE;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  padding: 4px 0;
+}
+
+@keyframes slide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-1280px, 0, 0);
+  }
+}

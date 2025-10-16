@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Rover Photo Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/main.css">
+</head>
+<body>
+    <div class="infinite-scrolling"></div>
+
+    <h1>Mars Rover Photo Explorer</h1>
+    <b>made by noah ford</b>
+    <div class="Controls">
+        <form action="/submit" method="POST">
+            <label for="rover">Select Rover:</label>
+            <select id="rover" name="rover" required>
+                <option value="">--Please select rover--</option>
+                <option value="curiosity">Curiosity</option>
+                <option value="opportunity">Opportunity</option>
+                <option value="spirit">Spirit</option>
+            </select>
+
+            <label for="date">Select Earth Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <button type="submit"
+                    name="mode"
+                    value="result">
+                Submit
+            </button>
+
+            <button type="submit"
+                    id="latestbtn"
+                    name="mode"
+                    value="latest">
+                See Latest
+            </button>
+        </form>
+
+        <p style="color: red;"><b>NOTE:</b> Opportunity and Spirit photos are currently offline</p>
+    </div>
+
+    <br>
+
+    {% if photos %}
+        <h2>
+            Results for {{ rover|capitalize }} 
+            {% if mode == 'result' %} 
+                on {{ date }}
+            {% elif mode == 'latest' %}
+                - Latest
+            {% endif %}
+            </h2>
+        {% for photo in photos %}
+        <div class="photo-card">
+            <div class="cam-label">{{ photo.camera.name }}</div>
+            <button class="download-btn" data-src="{{ photo.img_src }}" data-filename="{{ rover }}-{{ date or 'latest' }}-{{ loop.index0 }}.jpg">⬇</button>
+            <img src="{{ photo.img_src }}" alt="Photo Inaccessible">
+        </div>
+        {% endfor %}
+    {% elif rover and date %}
+        <h2>No photos found for {{ rover|capitalize }} on {{ date }}.</p>
+    {% endif %}
+    </body>
+    
+    <script>
+        const dateInput = document.getElementById('date');
+        const btn = document.getElementById('latestbtn');
+
+        latestbtn.addEventListener('click', (e) => {
+            dateInput.removeAttribute('required');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.download-btn');
+            if (!btn) return;
+            const url = btn.dataset.src;
+            const filename = btn.dataset.filename || 'image.jpg';
+            const proxyUrl = '/download?url=' + encodeURIComponent(url) + '&filename=' + encodeURIComponent(filename);
+            window.location.href = proxyUrl;
+        });
+    </script>
+</html>
